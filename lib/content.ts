@@ -4,7 +4,7 @@ export const profile = {
   name: "Wayan Candra Yoga Kamandanu",
   shortName: "Wayan Candra Yoga",
   role: "Full Stack Developer",
-  location: "Manado, North Sulawesi, Indonesia",
+  location: "Jakarta, Indonesia",
   headline: "I build the backend systems and internal tools that teams rely on every day.",
   intro:
     "Informatics Engineering graduate working across Laravel, Next.js and Go. I design microservices, tune them for latency, and ship internal applications that business teams use directly.",
@@ -17,7 +17,7 @@ export const profile = {
 };
 
 export const about = [
-  "I'm a full stack developer based in Manado. I studied Informatics Engineering at Universitas Sam Ratulangi and graduated with a GPA of 3.64.",
+  "I'm a full stack developer based in Jakarta. I studied Informatics Engineering at Universitas Sam Ratulangi and graduated with a GPA of 3.64.",
   "Most of my work sits on the backend: distributed Laravel services behind a Go gateway, event-driven processing with RabbitMQ, and Redis caching to keep response times down. I also build the interfaces on top, in Next.js and React, because the best internal tools come from owning the whole path from database to screen.",
   "At university I coordinated the SAR robot team in our robotics unit, designing an autonomous navigation robot for the Indonesian Robot Contest. Today I use personal projects to practise Go, clean architecture and containerised deployments.",
 ];
@@ -115,7 +115,7 @@ export const work: CompanyWork[] = [
     period: "Jan 2024 — Jan 2026",
     cases: [
       {
-        title: "SIMPRO business information system",
+        title: "SIMPRO (Sistem Informasi Properti)",
         kind: "Full stack · Digitisation",
         summary:
           "Replaced a company's Excel-based workflows with one integrated system, from stock to cash to customer instalments.",
@@ -149,15 +149,17 @@ export const work: CompanyWork[] = [
         demoUrl: "https://uniq-faq-dev.web.app/faq",
       },
       {
-        title: "Phone-verified registration",
+        title: "Register page",
         kind: "Web · Internship",
         summary:
-          "A sign-up flow for prospective customers that proves a visitor controls their phone number before an account is created.",
+          "The sign-up page for prospective customers. It looks like one form, but it coordinates four parties (the web app, the API, Firebase and WhatsApp) to prove a visitor owns their phone number before an account exists.",
         points: [
-          "Checks that the phone number and email are free before anything is sent.",
-          "reCAPTCHA through Firebase, then a one-time code delivered by WhatsApp.",
-          "After the code is verified, signs in with a Firebase custom token and saves the registration with that token.",
-          "Every step has an error path (details already taken, wrong code), so a visitor is never left on a dead end.",
+          "Availability first: phone and email are checked against the API before anything is sent, so a visitor learns about a duplicate straight away instead of after the verification step.",
+          "Bot protection: a reCAPTCHA token is generated through Firebase and verified by the API before it will send a code.",
+          "One-time code over WhatsApp: the API sends it, and the page opens a verification popup that waits for it.",
+          "Three different tokens in one flow: the reCAPTCHA token, a custom token returned by the API once the code is valid, and the Firebase token obtained by signing in with that custom token. Each is used for one step only.",
+          "The registration is saved only at the end, together with the Firebase token, so a half-finished attempt never leaves an account behind.",
+          "Two failure loops that return to the right place: details already taken sends the visitor back to the form, and a wrong code returns to the popup, each with a clear message.",
           "The linked page runs in the company's development environment.",
         ],
         stack: ["Firebase", "reCAPTCHA", "WhatsApp verification", "REST API"],
