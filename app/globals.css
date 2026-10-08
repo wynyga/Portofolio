@@ -356,6 +356,25 @@ a {
 }
 
 /* ---------- Case studies ---------- */
+.company + .company {
+  margin-top: 3.5rem;
+}
+.company-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-weight: 400;
+  color: var(--muted);
+}
+.company-name {
+  color: var(--accent);
+  font-weight: 500;
+}
 .cases > li {
   padding-block: 2.25rem;
   border-top: 1px solid var(--line);
@@ -372,7 +391,7 @@ a {
 .case-idx {
   color: var(--accent);
 }
-.case h3,
+.case h4,
 .role h3,
 .project h3 {
   font-family: var(--font-display), Georgia, serif;

@@ -72,41 +72,51 @@ export default function Home() {
         </Section>
 
         <Section id="work" index="02" label="Selected work">
-          <ol className="cases">
-            {work.map((c) => (
-              <li key={c.index} className="case">
-                <div className="case-head">
-                  <span className="mono case-idx">{c.index}</span>
-                  <div>
-                    <h3>{c.title}</h3>
-                    <p className="mono kind">{c.kind}</p>
-                  </div>
-                </div>
-                <p className="case-summary">{c.summary}</p>
-                <ul className="points">
-                  {c.points.map((p) => (
-                    <li key={p}>{p}</li>
-                  ))}
-                </ul>
-                <Tags items={c.stack} />
-                {c.internal && (
-                  <div className="project-links">
-                    <button type="button" className="btn btn-sm" disabled aria-label={`${c.title}: internal tool, not publicly available`}>
-                      Internal Tools
-                    </button>
-                  </div>
-                )}
-                {c.demoUrl && (
-                  <div className="project-links">
-                    <a className="btn btn-sm btn-primary" href={c.demoUrl} target="_blank" rel="noopener noreferrer">
-                      Live demo <span aria-hidden="true">↗</span>
-                      <span className="sr-only"> of {c.title} (opens in a new tab)</span>
-                    </a>
-                  </div>
-                )}
-              </li>
-            ))}
-          </ol>
+          {work.map((company) => (
+            <div key={company.company} className="company">
+              <h3 className="mono company-head">
+                <span className="company-name">{company.company}</span>
+                <span>
+                  {company.role} · {company.period}
+                </span>
+              </h3>
+              <ol className="cases">
+                {company.cases.map((c, i) => (
+                  <li key={c.title} className="case">
+                    <div className="case-head">
+                      <span className="mono case-idx">{String(i + 1).padStart(2, "0")}</span>
+                      <div>
+                        <h4>{c.title}</h4>
+                        <p className="mono kind">{c.kind}</p>
+                      </div>
+                    </div>
+                    <p className="case-summary">{c.summary}</p>
+                    <ul className="points">
+                      {c.points.map((p) => (
+                        <li key={p}>{p}</li>
+                      ))}
+                    </ul>
+                    <Tags items={c.stack} />
+                    {c.internal && (
+                      <div className="project-links">
+                        <button type="button" className="btn btn-sm" disabled aria-label={`${c.title}: internal tool, not publicly available`}>
+                          Internal Tools
+                        </button>
+                      </div>
+                    )}
+                    {c.demoUrl && (
+                      <div className="project-links">
+                        <a className="btn btn-sm btn-primary" href={c.demoUrl} target="_blank" rel="noopener noreferrer">
+                          Live demo <span aria-hidden="true">↗</span>
+                          <span className="sr-only"> of {c.title} (opens in a new tab)</span>
+                        </a>
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
         </Section>
 
         <Section id="experience" index="03" label="Experience">

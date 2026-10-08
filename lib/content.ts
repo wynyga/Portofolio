@@ -29,7 +29,6 @@ export const facts = [
 ];
 
 export type CaseStudy = {
-  index: string;
   title: string;
   kind: string;
   summary: string;
@@ -41,79 +40,115 @@ export type CaseStudy = {
   internal?: boolean;
 };
 
-// Company and client names are intentionally left out of these case studies.
-export const work: CaseStudy[] = [
+export type CompanyWork = {
+  company: string;
+  role: string;
+  period: string;
+  cases: CaseStudy[];
+};
+
+// Newest first, matching the Experience section. Cases are numbered per company by the page.
+export const work: CompanyWork[] = [
   {
-    index: "01",
-    internal: true,
-    title: "Distributed assessment platform",
-    kind: "Backend · Architecture",
-    summary:
-      "The core services behind an online assessment and recruitment product, split into independently deployable microservices.",
-    points: [
-      "Laravel microservices for candidate, content, tenant, interview and organisation domains.",
-      "A Go API gateway that routes and manages requests across services.",
-      "Asynchronous event processing over RabbitMQ so slow work never blocks a request.",
-      "Redis as a caching layer to cut response latency on hot reads.",
-      "Everything containerised with Docker so development and production behave the same.",
+    company: "PT Aneka Search Indonesia",
+    role: "Full Stack Developer",
+    period: "Mar 2026 — Present",
+    cases: [
+      {
+        internal: true,
+        title: "Distributed assessment platform",
+        kind: "Backend · Architecture",
+        summary:
+          "The core services behind an online assessment and recruitment product, split into independently deployable microservices.",
+        points: [
+          "Laravel microservices for candidate, content, tenant, interview and organisation domains.",
+          "A Go API gateway that routes and manages requests across services.",
+          "Asynchronous event processing over RabbitMQ so slow work never blocks a request.",
+          "Redis as a caching layer to cut response latency on hot reads.",
+          "Everything containerised with Docker so development and production behave the same.",
+        ],
+        stack: ["Laravel", "Go", "RabbitMQ", "Redis", "Docker"],
+      },
+      {
+        internal: true,
+        title: "Assessment support tools",
+        kind: "Full stack · Internal product",
+        summary:
+          "An internal application the assessment team uses to generate and manage question banks, without engineering in the loop.",
+        points: [
+          "Question bank generation and management, built with Next.js on a Laravel API.",
+          "An AI interview generation feature, built into the same workflow.",
+          "A centralised audit log that records every data change made through the admin-role tools, so changes are traceable.",
+        ],
+        stack: ["Next.js", "Laravel", "PostgreSQL", "TypeScript"],
+      },
+      {
+        internal: true,
+        title: "Participant spike monitoring",
+        kind: "Observability · Dashboard",
+        summary:
+          "A dashboard that watches load on the online test platform so the team sees a surge of participants as it happens.",
+        points: [
+          "Real-time checks on concurrent test participants.",
+          "Alerting built on Prometheus metrics, so spikes are flagged instead of discovered.",
+        ],
+        stack: ["Prometheus", "Alerting", "Real-time checks"],
+      },
+      {
+        internal: true,
+        title: "Talent analytics dashboard",
+        kind: "Frontend · Data",
+        summary:
+          "An interactive analytics dashboard for exploring a talent dataset, rebuilt from a static mockup into a working React app.",
+        points: [
+          "React front end with Recharts visualisations and TanStack Query for data access.",
+          "Queries run against an in-browser SQLite database (sql.js), so filtering stays instant with no server round-trip.",
+          "Covered by unit tests (Vitest) and end-to-end tests (Playwright).",
+        ],
+        stack: ["React", "TypeScript", "Recharts", "SQLite (sql.js)", "Playwright"],
+      },
     ],
-    stack: ["Laravel", "Go", "RabbitMQ", "Redis", "Docker"],
   },
   {
-    index: "02",
-    internal: true,
-    title: "Assessment support tools",
-    kind: "Full stack · Internal product",
-    summary:
-      "An internal application the assessment team uses to generate and manage question banks, without engineering in the loop.",
-    points: [
-      "Question bank generation and management, built with Next.js on a Laravel API.",
-      "An AI interview generation feature, built into the same workflow.",
-      "A centralised audit log that records every data change made through the admin-role tools, so changes are traceable.",
+    company: "PT Bumi Asih",
+    role: "Full Stack Developer",
+    period: "Jan 2024 — Jan 2026",
+    cases: [
+      {
+        title: "SIMPRO business information system",
+        kind: "Full stack · Digitisation",
+        summary:
+          "Replaced a company's Excel-based workflows with one integrated system, from stock to cash to customer instalments.",
+        points: [
+          "Designed the architecture: Laravel backend, Next.js frontend.",
+          "An automated finance module covering warehouse stock monitoring, cash transactions and real-time customer instalment tracking.",
+          "Automated annual reporting that speeds up business performance evaluation.",
+          "The demo is the front end running on made-up sample data (no real company records) and works without the backend.",
+        ],
+        stack: ["Laravel", "Next.js"],
+        demoUrl: "https://simpro-sb-admin-kj9u.vercel.app/signin",
+      },
     ],
-    stack: ["Next.js", "Laravel", "PostgreSQL", "TypeScript"],
   },
   {
-    index: "03",
-    internal: true,
-    title: "Participant spike monitoring",
-    kind: "Observability · Dashboard",
-    summary:
-      "A dashboard that watches load on the online test platform so the team sees a surge of participants as it happens.",
-    points: [
-      "Real-time checks on concurrent test participants.",
-      "Alerting built on Prometheus metrics, so spikes are flagged instead of discovered.",
+    company: "PT Aplikasi Uniq Indonesia",
+    role: "Backend Developer (Intern)",
+    period: "Sep 2024 — Dec 2024",
+    cases: [
+      {
+        title: "FAQ chatbot and content API",
+        kind: "Backend · Internship",
+        summary:
+          "Backend for the FAQ page of a content management system, plus a chatbot that answers visitors' questions on that page.",
+        points: [
+          "A RESTful CRUD API for the content management system, built with Node.js and Express.js.",
+          "MongoDB data model tuned for more efficient access to FAQ content.",
+          "An interactive chatbot on the FAQ page, powered by a Hugging Face model, to answer users faster.",
+        ],
+        stack: ["Node.js", "Express.js", "MongoDB", "Hugging Face"],
+        demoUrl: "https://uniq-faq-dev.web.app/faq",
+      },
     ],
-    stack: ["Prometheus", "Alerting", "Real-time checks"],
-  },
-  {
-    index: "04",
-    internal: true,
-    title: "Talent analytics dashboard",
-    kind: "Frontend · Data",
-    summary:
-      "An interactive analytics dashboard for exploring a talent dataset, rebuilt from a static mockup into a working React app.",
-    points: [
-      "React front end with Recharts visualisations and TanStack Query for data access.",
-      "Queries run against an in-browser SQLite database (sql.js), so filtering stays instant with no server round-trip.",
-      "Covered by unit tests (Vitest) and end-to-end tests (Playwright).",
-    ],
-    stack: ["React", "TypeScript", "Recharts", "SQLite (sql.js)", "Playwright"],
-  },
-  {
-    index: "05",
-    title: "SIMPRO business information system",
-    kind: "Full stack · Digitisation",
-    summary:
-      "Replaced a company's Excel-based workflows with one integrated system, from stock to cash to customer instalments.",
-    points: [
-      "Designed the architecture: Laravel backend, Next.js frontend.",
-      "An automated finance module covering warehouse stock monitoring, cash transactions and real-time customer instalment tracking.",
-      "Automated annual reporting that speeds up business performance evaluation.",
-      "The demo is the front end running on made-up sample data (no real company records) and works without the backend.",
-    ],
-    stack: ["Laravel", "Next.js"],
-    demoUrl: "https://simpro-sb-admin-kj9u.vercel.app/signin",
   },
 ];
 
