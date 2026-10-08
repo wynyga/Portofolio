@@ -161,18 +161,18 @@ export type SideProject = {
 
 export const projects: SideProject[] = [
   {
+    name: "GoBook",
+    summary:
+      "A library system built as Go microservices behind an API gateway, with a Next.js front end. Borrowing spans services with an atomic copy reservation and compensation when a step fails; the gateway guards internal routes and the web app keeps the JWT in an httpOnly cookie.",
+    stack: ["Go", "Microservices", "PostgreSQL", "Docker", "Next.js"],
+    href: "https://github.com/wynyga/GoBook",
+  },
+  {
     name: "E-commerce API",
     summary:
       "An e-commerce backend split into auth, product and cart services. Each service owns its database migrations and ships in its own container, wired together with Docker Compose.",
     stack: ["Go", "JWT", "Docker", "Microservices"],
     href: "https://github.com/wynyga/E-commerceAPI",
-  },
-  {
-    name: "Gotoko",
-    summary:
-      "A bookstore management REST API in Go with authentication, books, stock and customers, organised into domain, repository, service and API layers.",
-    stack: ["Go", "REST", "Clean architecture", "SQL migrations"],
-    href: "https://github.com/wynyga/Gotoko",
   },
   {
     name: "RESTful API .NET",
