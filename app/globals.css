@@ -166,10 +166,9 @@ a {
   line-height: 1;
 }
 .brand-logo {
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 0.55rem;
-  border: 1px solid var(--line);
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
 }
 .brand-text span {
   color: var(--accent);

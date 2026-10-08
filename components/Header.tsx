@@ -7,7 +7,7 @@ export default function Header() {
     <header className="site-header">
       <div className="wrap header-inner">
         <a href="#top" className="brand" aria-label={`${profile.name}, back to top`}>
-          <Image src="/logo.png" alt="" width={36} height={36} className="brand-logo" priority />
+          <Image src="/logo.png" alt="" width={40} height={40} className="brand-logo" priority />
           <span className="brand-text">
             WCY<span aria-hidden="true">.</span>
           </span>
