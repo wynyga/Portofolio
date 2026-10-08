@@ -72,10 +72,6 @@ export default function Home() {
         </Section>
 
         <Section id="work" index="02" label="Selected work">
-          <p className="note">
-            Built at work, so client and company details are kept out. The focus here is architecture, decisions and
-            outcomes.
-          </p>
           <ol className="cases">
             {work.map((c) => (
               <li key={c.index} className="case">
