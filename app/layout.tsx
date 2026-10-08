@@ -45,8 +45,9 @@ export const viewport: Viewport = {
   themeColor: "#05060f",
 };
 
-// Runs before first paint: applies the visitor's saved theme (dark by default) and flags JS for the reveal animations.
-const themeScript = `(function(){try{var d=document.documentElement;d.classList.add('js');var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='dark'}d.dataset.theme=t}catch(e){}})();`;
+// Runs before first paint: flags JS for the reveal animations. The site is dark-only (no theme toggle),
+// so any theme saved by an earlier version is ignored; the light palette in globals.css is kept for reuse.
+const themeScript = `document.documentElement.classList.add('js');`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

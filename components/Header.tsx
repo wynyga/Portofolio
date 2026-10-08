@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { nav, profile } from "@/lib/content";
-import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
@@ -16,7 +15,6 @@ export default function Header() {
             </a>
           ))}
         </nav>
-        <ThemeToggle />
       </div>
     </header>
   );
