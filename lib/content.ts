@@ -136,18 +136,19 @@ export const work: CompanyWork[] = [
     period: "Sep 2024 — Dec 2024",
     cases: [
       {
-        title: "FAQ chatbot and content API",
-        kind: "Backend · Internship",
-        summary:
-          "Backend for the FAQ page of a content management system, plus a chatbot that answers visitors' questions on that page.",
-        points: [
-          "A RESTful CRUD API for the content management system, built with Node.js and Express.js.",
-          "MongoDB data model tuned for more efficient access to FAQ content.",
-          "An interactive chatbot on the FAQ page, powered by a Hugging Face model, to answer users faster.",
-      "Also built the registration page for the same product. It is internal, so there is no public link.",
-        ],
-        stack: ["Node.js", "Express.js", "MongoDB", "Hugging Face"],
-        demoUrl: "https://uniq-faq-dev.web.app/faq",
+        title: "FAQ chatbot, content API and phone-verified sign-up",
+    kind: "Backend & web · Internship",
+    summary:
+      "Backend for the FAQ page of a content management system with a chatbot that answers visitors' questions, plus the web registration flow that verifies a phone number before an account is created.",
+    points: [
+      "A RESTful CRUD API for the content management system, built with Node.js and Express.js.",
+      "MongoDB data model tuned for more efficient access to FAQ content.",
+      "An interactive chatbot on the FAQ page, powered by a Hugging Face model, to answer users faster.",
+      "Built the registration flow: availability check for phone and email, reCAPTCHA through Firebase, a WhatsApp one-time code, then Firebase sign-in with a custom token before the registration is saved.",
+      "Every step has an error path (details already taken, wrong code), so a visitor is never left on a dead end. The registration page is not linked here because it sends real verification messages.",
+    ],
+    stack: ["Node.js", "Express.js", "MongoDB", "Hugging Face", "Firebase", "reCAPTCHA"],
+    demoUrl: "https://uniq-faq-dev.web.app/faq",
       },
     ],
   },
