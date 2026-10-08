@@ -8,9 +8,6 @@ export default function Header() {
       <div className="wrap header-inner">
         <a href="#top" className="brand" aria-label={`${profile.name}, back to top`}>
           <Image src="/logo.png" alt="" width={40} height={40} className="brand-logo" priority />
-          <span className="brand-text">
-            WCY<span aria-hidden="true">.</span>
-          </span>
         </a>
         <nav aria-label="Primary" className="nav">
           {nav.map((item) => (
