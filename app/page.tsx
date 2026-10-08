@@ -1,4 +1,8 @@
+import BackToTop from "@/components/BackToTop";
+import DescentRail from "@/components/DescentRail";
 import Header from "@/components/Header";
+import HeroScene from "@/components/HeroScene";
+import MoonSurface from "@/components/MoonSurface";
 import Section from "@/components/Section";
 import {
   about,
@@ -29,28 +33,33 @@ export default function Home() {
         Skip to content
       </a>
       <Header />
+      <DescentRail />
 
       <main id="top">
         <section className="hero">
-          <div className="wrap">
-            <p className="mono eyebrow">
-              {profile.role} <span aria-hidden="true">/</span> {profile.location}
-            </p>
-            <h1 className="hero-name">{profile.name}</h1>
-            <p className="hero-headline">{profile.headline}</p>
-            <div className="hero-actions">
-              <a className="btn btn-primary" href="#work">
-                See selected work
-              </a>
-              <a className="btn" href={`mailto:${profile.email}`}>
-                Get in touch
-              </a>
-              {profile.cvUrl && (
-                <a className="btn" href={profile.cvUrl} download>
-                  Download CV
+          <div className="wrap hero-grid">
+            <div className="hero-copy">
+              <p className="mono eyebrow">
+                <span className="status-dot" aria-hidden="true" />
+                {profile.role} <span aria-hidden="true">/</span> {profile.location}
+              </p>
+              <h1 className="hero-name">{profile.name}</h1>
+              <p className="hero-headline">{profile.headline}</p>
+              <div className="hero-actions">
+                <a className="btn btn-primary" href="#work">
+                  See selected work
                 </a>
-              )}
+                <a className="btn" href={`mailto:${profile.email}`}>
+                  Get in touch
+                </a>
+                {profile.cvUrl && (
+                  <a className="btn" href={profile.cvUrl} download>
+                    Download CV
+                  </a>
+                )}
+              </div>
             </div>
+            <HeroScene />
           </div>
         </section>
 
@@ -221,11 +230,13 @@ export default function Home() {
       </main>
 
       <footer className="site-footer">
+        <MoonSurface />
         <div className="wrap footer-inner">
           <p className="mono">© {new Date().getFullYear()} {profile.name}</p>
           <p className="mono">Built with Next.js · Hosted on Vercel</p>
         </div>
       </footer>
+      <BackToTop />
     </>
   );
 }

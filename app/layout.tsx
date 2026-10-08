@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, Space_Mono } from "next/font/google";
 import { profile } from "@/lib/content";
+import Starfield from "@/components/Starfield";
 import "./globals.css";
 
-const display = Instrument_Serif({
+const display = Space_Grotesk({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
   variable: "--font-display",
   display: "swap",
 });
@@ -17,8 +16,9 @@ const sans = Inter({
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
+const mono = Space_Mono({
   subsets: ["latin"],
+  weight: ["400", "700"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: "dark",
-  themeColor: "#0e0e10",
+  themeColor: "#05060f",
 };
 
 // Runs before first paint: applies the visitor's saved theme (dark by default) and flags JS for the reveal animations.
@@ -59,7 +59,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <div className="nebula" aria-hidden="true" />
+        <Starfield />
+        {children}
+      </body>
     </html>
   );
 }
