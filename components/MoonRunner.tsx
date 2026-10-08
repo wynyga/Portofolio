@@ -7,6 +7,7 @@ type Mode = "run" | "held" | "fall";
 const W = 48; // sprite width in px
 const SPEED = 70; // jogging speed, px/s
 const GRAVITY = 650; // lunar-ish: floaty, but still lands
+const CEILING = 72; // px from the top of the viewport, clear of the sticky header
 const LINES = ["Hey!", "Put me down!", "Houston?!", "Whoaaa", "Wkwkwk", "I was jogging!"];
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
@@ -21,6 +22,13 @@ export default function MoonRunner() {
   const [line, setLine] = useState<string | null>(null);
   const lineTimer = useRef(0);
   const s = useRef({ x: 0, y: 0, dir: 1, vx: 0, vy: 0, tx: 0, ty: 0, rot: 0, grabX: 0, grabY: 0, mode: "run" as Mode });
+
+  // Highest he can go: just under the sticky header, wherever the footer currently sits in the viewport.
+  // (Relative to his resting position, so it is negative.)
+  function ceilingY() {
+    const wrap = wrapRef.current!;
+    return CEILING - wrap.parentElement!.getBoundingClientRect().top - wrap.offsetTop;
+  }
 
   function say(text: string | null, ms = 0) {
     window.clearTimeout(lineTimer.current);
@@ -71,6 +79,7 @@ export default function MoonRunner() {
         st.rot += (0 - st.rot) * Math.min(1, dt * 10);
       } else if (st.mode === "held") {
         // Ease toward the cursor so he lags and swings like something dangling from a hand.
+        st.ty = clamp(st.ty, ceilingY(), 0); // keeps him inside the window if the page is scrolled while he is held
         const k = Math.min(1, dt * 16);
         const nx = st.x + (st.tx - st.x) * k;
         const ny = st.y + (st.ty - st.y) * k;
@@ -92,6 +101,11 @@ export default function MoonRunner() {
           st.vx = -Math.abs(st.vx) * 0.5;
         }
         st.rot += (0 - st.rot) * Math.min(1, dt * 6);
+        const ceiling = ceilingY();
+        if (st.y < ceiling) {
+          st.y = ceiling;
+          st.vy = Math.abs(st.vy) * 0.3; // soft bump off the top of the window
+        }
         if (st.y >= 0) {
           st.y = 0;
           if (st.vy > 140) {
@@ -154,14 +168,14 @@ export default function MoonRunner() {
     if (st.mode !== "held") return;
     const { px, py, w } = scenePoint(e);
     st.tx = clamp(px - st.grabX, 0, Math.max(0, w - W));
-    st.ty = clamp(py - st.grabY - wrapRef.current!.offsetTop - 14, -wrapRef.current!.offsetTop, 0);
+    st.ty = clamp(py - st.grabY - wrapRef.current!.offsetTop - 14, ceilingY(), 0);
   }
 
   function release() {
     const st = s.current;
     if (st.mode !== "held") return;
-    st.vx = clamp(st.vx, -600, 600);
-    st.vy = clamp(st.vy, -450, 300);
+    st.vx = clamp(st.vx, -800, 800);
+    st.vy = clamp(st.vy, -800, 300);
     st.mode = "fall";
     setMode("fall");
     say(null);

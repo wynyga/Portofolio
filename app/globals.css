@@ -1073,7 +1073,7 @@ a {
 /* ---------- Footer: moon surface ---------- */
 .site-footer {
   position: relative;
-  overflow: hidden;
+  /* Not clipped: the astronaut and rocket can fly up over the page above. */
   margin-top: 3rem;
   padding-block: 10.5rem 2rem;
   color: var(--muted);
@@ -1088,7 +1088,6 @@ a {
 .moon-scene {
   position: absolute;
   inset: 0;
-  container-type: inline-size;
   pointer-events: none;
 }
 .earth {
@@ -1293,7 +1292,8 @@ a {
 }
 .moon-rocket[data-state="away"] {
   visibility: hidden;
-  transform: translateY(-340px);
+  opacity: 0;
+  transform: translateY(-560px);
 }
 .moon-rocket[data-state="land"] {
   animation: touchdown 2.2s cubic-bezier(0.15, 0.6, 0.3, 1) both;
@@ -1315,17 +1315,27 @@ a {
 .pad-dust[data-state="land"] {
   animation: dust 1.4s ease-out 0.9s both;
 }
+/* The rocket now flies over the page instead of being clipped, so it fades out as it climbs. */
 @keyframes liftoff {
+  60% {
+    opacity: 1;
+  }
   to {
-    transform: translateY(-340px);
+    transform: translateY(-560px);
+    opacity: 0;
   }
 }
 @keyframes touchdown {
   from {
-    transform: translateY(-340px);
+    transform: translateY(-560px);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
   }
   to {
     transform: none;
+    opacity: 1;
   }
 }
 @keyframes rumble {
