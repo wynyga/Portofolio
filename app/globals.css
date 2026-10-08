@@ -158,11 +158,20 @@ a {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.6rem;
   line-height: 1;
 }
-.brand span {
+.brand-logo {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--line);
+}
+.brand-text span {
   color: var(--accent);
 }
 
