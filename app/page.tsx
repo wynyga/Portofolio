@@ -93,6 +93,14 @@ export default function Home() {
                   ))}
                 </ul>
                 <Tags items={c.stack} />
+                {c.demoUrl && (
+                  <div className="project-links">
+                    <a className="btn btn-sm btn-primary" href={c.demoUrl} target="_blank" rel="noopener noreferrer">
+                      Live demo <span aria-hidden="true">↗</span>
+                      <span className="sr-only"> of {c.title} (opens in a new tab)</span>
+                    </a>
+                  </div>
+                )}
               </li>
             ))}
           </ol>

@@ -35,6 +35,8 @@ export type CaseStudy = {
   summary: string;
   points: string[];
   stack: string[];
+  /** A hosted demo that runs on sample data, when one exists. */
+  demoUrl?: string;
 };
 
 // Company and client names are intentionally left out of these case studies.
@@ -102,8 +104,10 @@ export const work: CaseStudy[] = [
       "Designed the architecture: Laravel backend, Next.js frontend.",
       "An automated finance module covering warehouse stock monitoring, cash transactions and real-time customer instalment tracking.",
       "Automated annual reporting that speeds up business performance evaluation.",
+      "The demo is the front end running on made-up sample data (no real company records) and works without the backend.",
     ],
     stack: ["Laravel", "Next.js"],
+    demoUrl: "https://simpro-sb-admin-kj9u.vercel.app/signin",
   },
 ];
 
