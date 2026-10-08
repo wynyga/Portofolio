@@ -189,11 +189,12 @@ export const projects: SideProject[] = [
     href: "https://github.com/wynyga/E-commerceAPI",
   },
   {
-    name: "RESTful API .NET",
+    name: "ProjectTracker",
     summary:
-      "A layered ASP.NET REST API with role-aware users, authentication, a projects module, a dashboard summary endpoint and EF Core migrations.",
-    stack: ["C#", ".NET", "Entity Framework", "REST"],
+      "A project-tracking system: an ASP.NET Core API with JWT roles, paging and filters, overdue status derived from end dates, rate limiting and health checks, plus a Next.js dashboard. Covered by 76 tests and checked against a real MySQL container.",
+    stack: ["C#", ".NET", "EF Core", "MySQL", "Next.js"],
     href: "https://github.com/wynyga/RESTful-API-NET",
+    demoUrl: "https://projecttracker-one-orpin.vercel.app/",
   },
   {
     name: "Auth JWT service",
