@@ -122,17 +122,23 @@ export default function Home() {
           <ul className="projects">
             {projects.map((p) => (
               <li key={p.name}>
-                <a href={p.href} target="_blank" rel="noopener noreferrer" className="project">
-                  <span className="project-top">
-                    <h3>{p.name}</h3>
-                    <span className="arrow" aria-hidden="true">
-                      ↗
-                    </span>
-                  </span>
-                  <span className="project-summary">{p.summary}</span>
+                <article className="project">
+                  <h3>{p.name}</h3>
+                  <p className="project-summary">{p.summary}</p>
                   <Tags items={p.stack} />
-                  <span className="sr-only">(opens GitHub in a new tab)</span>
-                </a>
+                  <div className="project-links">
+                    {p.demoUrl && (
+                      <a className="btn btn-sm btn-primary" href={p.demoUrl} target="_blank" rel="noopener noreferrer">
+                        Live demo <span aria-hidden="true">↗</span>
+                        <span className="sr-only"> of {p.name} (opens in a new tab)</span>
+                      </a>
+                    )}
+                    <a className="btn btn-sm" href={p.href} target="_blank" rel="noopener noreferrer">
+                      GitHub <span aria-hidden="true">↗</span>
+                      <span className="sr-only"> repository for {p.name} (opens in a new tab)</span>
+                    </a>
+                  </div>
+                </article>
               </li>
             ))}
           </ul>

@@ -156,7 +156,10 @@ export type SideProject = {
   name: string;
   summary: string;
   stack: string[];
+  /** Source repository. */
   href: string;
+  /** Hosted demo, when there is one. */
+  demoUrl?: string;
 };
 
 export const projects: SideProject[] = [
@@ -166,6 +169,7 @@ export const projects: SideProject[] = [
       "A library system built as Go microservices behind an API gateway, with a Next.js front end. Borrowing spans services with an atomic copy reservation and compensation when a step fails; the gateway guards internal routes and the web app keeps the JWT in an httpOnly cookie.",
     stack: ["Go", "Microservices", "PostgreSQL", "Docker", "Next.js"],
     href: "https://github.com/wynyga/GoBook",
+    demoUrl: "https://go-book-omega.vercel.app/",
   },
   {
     name: "E-commerce API",

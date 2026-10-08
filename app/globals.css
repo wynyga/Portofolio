@@ -481,24 +481,20 @@ a {
 }
 .project:hover {
   border-color: var(--accent);
-  transform: translateY(-2px);
-}
-.project-top {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
 }
 .project h3 {
   font-size: 1.55rem;
 }
-.arrow {
-  color: var(--muted);
-  transition: color 0.2s, transform 0.2s;
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
 }
-.project:hover .arrow {
-  color: var(--accent);
-  transform: translate(2px, -2px);
+.btn-sm {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.85rem;
+  gap: 0.3rem;
 }
 .project-summary {
   margin-top: 0.7rem;
