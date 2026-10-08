@@ -144,6 +144,7 @@ export const work: CompanyWork[] = [
           "A RESTful CRUD API for the content management system, built with Node.js and Express.js.",
           "MongoDB data model tuned for more efficient access to FAQ content.",
           "An interactive chatbot on the FAQ page, powered by a Hugging Face model, to answer users faster.",
+      "Also built the registration page for the same product. It is internal, so there is no public link.",
         ],
         stack: ["Node.js", "Express.js", "MongoDB", "Hugging Face"],
         demoUrl: "https://uniq-faq-dev.web.app/faq",
