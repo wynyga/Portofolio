@@ -37,12 +37,15 @@ export type CaseStudy = {
   stack: string[];
   /** A hosted demo that runs on sample data, when one exists. */
   demoUrl?: string;
+  /** Built for internal use, so there is nothing public to link to. */
+  internal?: boolean;
 };
 
 // Company and client names are intentionally left out of these case studies.
 export const work: CaseStudy[] = [
   {
     index: "01",
+    internal: true,
     title: "Distributed assessment platform",
     kind: "Backend · Architecture",
     summary:
@@ -58,6 +61,7 @@ export const work: CaseStudy[] = [
   },
   {
     index: "02",
+    internal: true,
     title: "Assessment support tools",
     kind: "Full stack · Internal product",
     summary:
@@ -71,6 +75,7 @@ export const work: CaseStudy[] = [
   },
   {
     index: "03",
+    internal: true,
     title: "Participant spike monitoring",
     kind: "Observability · Dashboard",
     summary:
@@ -83,6 +88,7 @@ export const work: CaseStudy[] = [
   },
   {
     index: "04",
+    internal: true,
     title: "Talent analytics dashboard",
     kind: "Frontend · Data",
     summary:

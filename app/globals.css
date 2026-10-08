@@ -491,6 +491,14 @@ a {
   gap: 0.5rem;
   margin-top: 1.25rem;
 }
+.btn:disabled {
+  cursor: default;
+  color: var(--muted);
+  background: transparent;
+}
+.btn:disabled:hover {
+  border-color: var(--line);
+}
 .btn-sm {
   padding: 0.45rem 0.95rem;
   font-size: 0.85rem;

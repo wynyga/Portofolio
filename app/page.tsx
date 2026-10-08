@@ -93,6 +93,13 @@ export default function Home() {
                   ))}
                 </ul>
                 <Tags items={c.stack} />
+                {c.internal && (
+                  <div className="project-links">
+                    <button type="button" className="btn btn-sm" disabled aria-label={`${c.title}: internal tool, not publicly available`}>
+                      Internal Tools
+                    </button>
+                  </div>
+                )}
                 {c.demoUrl && (
                   <div className="project-links">
                     <a className="btn btn-sm btn-primary" href={c.demoUrl} target="_blank" rel="noopener noreferrer">
