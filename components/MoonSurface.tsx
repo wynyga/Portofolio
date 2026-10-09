@@ -1,13 +1,14 @@
+import EarthButton from "./EarthButton";
 import MoonRocket from "./MoonRocket";
-import MoonRunner from "./MoonRunner";
+import MoonCrew from "./MoonCrew";
 
 // Footer scenery: a cratered lunar plain with a planted flag, Earth in the sky, a little rocket you can
-// launch and a tiny astronaut you can pick up. The scenery is decorative; the two toys are interactive
-// client components, with their motion styles in globals.css.
+// launch and the crew of tiny astronauts you can pick up. The scenery is decorative; the toys are
+// interactive client components, with their motion styles in globals.css.
 export default function MoonSurface() {
   return (
     <div className="moon-scene">
-      <span className="earth" aria-hidden="true" />
+      <EarthButton />
 
       <div className="moon-ground" aria-hidden="true">
         <span className="crater c1" />
@@ -30,7 +31,7 @@ export default function MoonSurface() {
       </svg>
 
       <MoonRocket />
-      <MoonRunner />
+      <MoonCrew />
     </div>
   );
 }

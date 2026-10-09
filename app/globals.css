@@ -1091,6 +1091,10 @@ a {
   pointer-events: none;
 }
 .earth {
+  padding: 0;
+  border: 0;
+  cursor: default;
+  pointer-events: auto;
   position: absolute;
   top: 0.6rem;
   right: 14%;
@@ -1175,7 +1179,15 @@ a {
   width: 40px;
   height: 56px;
 }
-/* The tiny astronaut: position and flipping are driven by MoonRunner.tsx; this styles the limbs per mode. */
+/* The tiny astronaut: position and flipping are driven by MoonCrew.tsx; this styles the limbs per mode. */
+.crowd {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* only the astronauts themselves are grabbable */
+}
+.runner[data-mode="held"] {
+  z-index: 6; /* the one in your hand is drawn over the others */
+}
 .runner {
   position: absolute;
   left: 0;
@@ -1202,7 +1214,7 @@ a {
   overflow: visible;
 }
 .runner[data-mode="run"] .runner-body {
-  animation: hop 0.9s ease-in-out infinite;
+  animation: hop 0.9s ease-in-out var(--hop-delay, 0s) infinite;
 }
 .runner-shadow {
   position: absolute;
@@ -1379,6 +1391,230 @@ a {
   }
 }
 
+/* ---------- Crew: astronaut editor, wall, custom runner ---------- */
+.editor {
+  pointer-events: auto; /* the footer scene that hosts one of these is pointer-events: none */
+  width: min(680px, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--bg) 90%, #1a2147);
+  color: var(--fg);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7), 0 0 60px -24px var(--glow);
+  overflow: auto;
+}
+.editor::backdrop {
+  background: rgba(2, 3, 10, 0.72);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.editor-body {
+  padding: 1.25rem;
+}
+.editor-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.editor-head h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+.editor-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: 1.25rem;
+}
+.editor-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  image-rendering: pixelated;
+  touch-action: none;
+  cursor: crosshair;
+}
+.editor-side {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.btn[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--chip);
+  box-shadow: 0 0 14px var(--glow);
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.4rem;
+  max-width: 15rem;
+}
+.swatch {
+  aspect-ratio: 1;
+  padding: 0;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.swatch[aria-pressed="true"] {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.mirror {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.mirror input {
+  accent-color: var(--accent);
+}
+.editor-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+.editor-preview svg {
+  flex: none;
+  image-rendering: pixelated;
+}
+.editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+.editor-note {
+  min-height: 1.5em;
+  margin-top: 0.9rem;
+  font-size: 0.88rem;
+}
+
+/* Drawn astronauts (the visitor's own and the wall's) use the pixel sprite instead of the default suit. */
+.runner-pixel {
+  display: block;
+  image-rendering: pixelated;
+}
+.runner[data-mode="run"] .runner-pixel {
+  animation: hop 0.9s ease-in-out var(--hop-delay, 0s) infinite;
+}
+.runner[data-mode="held"] .runner-pixel,
+.runner[data-mode="fall"] .runner-pixel {
+  transform-origin: 50% 10%;
+  animation: dangle 0.22s ease-in-out infinite alternate;
+}
+.runner[data-mode="fall"] .runner-pixel {
+  animation-duration: 0.45s;
+}
+@keyframes dangle {
+  from {
+    transform: rotate(-9deg);
+  }
+  to {
+    transform: rotate(9deg);
+  }
+}
+
+/* Owner controls: the Earth in the footer opens a PIN box that wipes the wall. */
+.crew {
+  position: relative;
+}
+.editor.wipe {
+  width: min(420px, calc(100vw - 2rem));
+}
+.wipe-title {
+  margin-bottom: 0.6rem;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+.wipe-key {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--glass);
+  color: var(--fg);
+  font: inherit;
+}
+
+/* "Too many requests" reset PIN row */
+.reset-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+.reset-row input {
+  width: 9rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--glass);
+  color: var(--fg);
+  font: inherit;
+}
+
+/* Owner-only moderation page */
+.admin-key {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 26rem;
+  margin-block: 1.5rem;
+}
+.admin-key input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--glass);
+  color: var(--fg);
+  font: inherit;
+}
+.admin-h {
+  margin-top: 2.5rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+.admin-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.admin-list li {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--glass);
+}
+.admin-list svg {
+  display: block;
+}
+.admin-actions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1099px) {
   .descent {
@@ -1409,6 +1645,9 @@ a {
 }
 
 @media (max-width: 640px) {
+  .editor-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
   body {
     font-size: 1rem;
   }

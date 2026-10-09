@@ -1,4 +1,5 @@
 import BackToTop from "@/components/BackToTop";
+import CrewSection from "@/components/CrewSection";
 import DescentRail from "@/components/DescentRail";
 import Header from "@/components/Header";
 import HeroScene from "@/components/HeroScene";
@@ -226,6 +227,10 @@ export default function Home() {
               </a>
             </li>
           </ul>
+        </Section>
+
+        <Section id="crew" index="08" label="Crew">
+          <CrewSection />
         </Section>
       </main>
 

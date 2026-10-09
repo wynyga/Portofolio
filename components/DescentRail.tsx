@@ -12,6 +12,7 @@ const STOPS = [
   { id: "skills", label: "Skills" },
   { id: "background", label: "Background" },
   { id: "contact", label: "Contact" },
+  { id: "crew", label: "Crew" },
 ];
 
 // A mission-style scroll indicator: a small lander descends a rail on the right edge as you read
