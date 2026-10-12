@@ -226,6 +226,14 @@ export type SideProject = {
 
 export const projects: SideProject[] = [
   {
+    name: "Solar System Explorer",
+    summary:
+      "An interactive 3D Solar System you explore by flying your own spaceship. Planets sit at their real positions for today, computed from NASA JPL orbital elements; an autopilot steers around obstacles to any world, which then opens verified fun facts and key stats. Custom velocity-based flight physics, a procedural ship, and a toggle between explorer and true-to-scale distances.",
+    stack: ["Next.js", "TypeScript", "Three.js", "React Three Fiber", "Zustand"],
+    href: "https://github.com/wynyga/SolarSystem",
+    demoUrl: "https://canzyyship.vercel.app/",
+  },
+  {
     name: "GoBook",
     summary:
       "A library system built as Go microservices behind an API gateway, with a Next.js front end. Borrowing spans services with an atomic copy reservation and compensation when a step fails; the gateway guards internal routes and the web app keeps the JWT in an httpOnly cookie.",
