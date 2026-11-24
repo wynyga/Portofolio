@@ -213,34 +213,12 @@ export const projects: SideProject[] = [
     demoUrl: "https://discordweebhook.tech",
   },
   {
-    name: "GoBook",
-    summary:
-      "A library system where the focus is the API gateway as the only door in: it validates the JWT, rate-limits login, never forwards internal routes, and services reject any request without its internal key. Borrowing a book spans the loan, member and catalog services, with an atomic copy reservation and compensation when a later step fails. Next.js front end keeps the JWT in an httpOnly cookie.",
-    stack: ["Go", "API gateway", "Microservices", "PostgreSQL", "Docker", "Next.js"],
-    href: "https://github.com/wynyga/GoBook",
-    demoUrl: "https://go-book-omega.vercel.app/",
-  },
-  {
-    name: "E-commerce API",
-    summary:
-      "An online-shop backend where the focus is checkout consistency without a shared transaction: an order touches the cart, product and order services, so stock is taken with one conditional UPDATE, released again if any step fails, and an Idempotency-Key makes a retried or double-clicked checkout return the original order. Cancel returns stock exactly once. Comes with a Next.js storefront and admin page.",
-    stack: ["Go", "Microservices", "MySQL", "Idempotency", "Docker", "Next.js"],
-    href: "https://github.com/wynyga/E-commerceAPI",
-  },
-  {
     name: "ProjectTracker",
     summary:
       "A project-tracking system: an ASP.NET Core API with JWT roles, paging and filters, overdue status derived from end dates, rate limiting and health checks, plus a Next.js dashboard. Covered by 76 tests and checked against a real MySQL container.",
     stack: ["C#", ".NET", "EF Core", "MySQL", "Next.js"],
     href: "https://github.com/wynyga/RESTful-API-NET",
     demoUrl: "https://projecttracker-one-orpin.vercel.app/",
-  },
-  {
-    name: "Auth JWT service",
-    summary:
-      "A focused Go service for sign-up and login with JWT, middleware-based route protection and database migrations.",
-    stack: ["Go", "JWT", "Migrations"],
-    href: "https://github.com/wynyga/authJWT-service",
   },
   {
     name: "Go + Redis experiments",
