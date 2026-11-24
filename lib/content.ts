@@ -253,18 +253,26 @@ export const projects: SideProject[] = [
     demoUrl: "https://canzyyship.vercel.app/",
   },
   {
+    name: "Discord Task Scheduler",
+    summary:
+      "A full stack app for scheduling messages to a Discord channel through a webhook. Schedules are built from plain choices (raw cron only under Advanced) and run on BullMQ; every attempt is logged with its HTTP code, and failures retry by type: 429 waits for Discord's retry_after, 5xx and timeouts retry, other 4xx stop. Messages are edited as a form or JSON with template variables and a Discord-style preview. Self-hosted on a VPS with Docker Compose and Caddy HTTPS.",
+    stack: ["Node.js", "Express", "TypeScript", "BullMQ", "Redis", "PostgreSQL", "React"],
+    href: "https://github.com/wynyga/Discord-WebHook",
+    demoUrl: "https://discordweebhook.tech",
+  },
+  {
     name: "GoBook",
     summary:
-      "A library system built as Go microservices behind an API gateway, with a Next.js front end. Borrowing spans services with an atomic copy reservation and compensation when a step fails; the gateway guards internal routes and the web app keeps the JWT in an httpOnly cookie.",
-    stack: ["Go", "Microservices", "PostgreSQL", "Docker", "Next.js"],
+      "A library system where the focus is the API gateway as the only door in: it validates the JWT, rate-limits login, never forwards internal routes, and services reject any request without its internal key. Borrowing a book spans the loan, member and catalog services, with an atomic copy reservation and compensation when a later step fails. Next.js front end keeps the JWT in an httpOnly cookie.",
+    stack: ["Go", "API gateway", "Microservices", "PostgreSQL", "Docker", "Next.js"],
     href: "https://github.com/wynyga/GoBook",
     demoUrl: "https://go-book-omega.vercel.app/",
   },
   {
     name: "E-commerce API",
     summary:
-      "An e-commerce backend split into auth, product and cart services. Each service owns its database migrations and ships in its own container, wired together with Docker Compose.",
-    stack: ["Go", "JWT", "Docker", "Microservices"],
+      "An online-shop backend where the focus is checkout consistency without a shared transaction: an order touches the cart, product and order services, so stock is taken with one conditional UPDATE, released again if any step fails, and an Idempotency-Key makes a retried or double-clicked checkout return the original order. Cancel returns stock exactly once. Comes with a Next.js storefront and admin page.",
+    stack: ["Go", "Microservices", "MySQL", "Idempotency", "Docker", "Next.js"],
     href: "https://github.com/wynyga/E-commerceAPI",
   },
   {
