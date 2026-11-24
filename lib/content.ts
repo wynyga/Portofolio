@@ -220,13 +220,6 @@ export const projects: SideProject[] = [
     href: "https://github.com/wynyga/RESTful-API-NET",
     demoUrl: "https://projecttracker-one-orpin.vercel.app/",
   },
-  {
-    name: "Go + Redis experiments",
-    summary:
-      "Small repositories exploring JWT sessions, rate limiting and caching with Redis on top of a Go clean architecture template.",
-    stack: ["Go", "Redis", "Rate limiting"],
-    href: "https://github.com/wynyga/golang-JWT-Redis",
-  },
 ];
 
 export const skills = [
