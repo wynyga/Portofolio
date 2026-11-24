@@ -31,7 +31,10 @@ export default function Reveal({
           }
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+      // threshold 0: reveal as soon as any part enters the (slightly shrunk) viewport. A ratio
+      // threshold never fires for a section taller than viewport / ratio, which left long
+      // sections such as Selected work invisible.
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
