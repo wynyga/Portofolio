@@ -7,7 +7,6 @@ const STOPS = [
   { id: "top", label: "Launch" },
   { id: "about", label: "About" },
   { id: "work", label: "Work" },
-  { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "background", label: "Background" },

@@ -12,7 +12,7 @@ npm run build      # production build
 
 ## Edit the content
 
-All copy (profile, case studies, experience, projects, skills) lives in [`lib/content.ts`](lib/content.ts).
+All copy (profile, work experience, projects, skills) lives in [`lib/content.ts`](lib/content.ts).
 Components only render it, so you rarely need to touch anything else.
 
 - **CV button:** put the PDF in `public/` and set `cvUrl` in `lib/content.ts`. It is empty by default because the CV contains a phone number.

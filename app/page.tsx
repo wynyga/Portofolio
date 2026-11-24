@@ -8,7 +8,6 @@ import Section from "@/components/Section";
 import {
   about,
   education,
-  experience,
   facts,
   organization,
   profile,
@@ -48,7 +47,7 @@ export default function Home() {
               <p className="hero-headline">{profile.headline}</p>
               <div className="hero-actions">
                 <a className="btn btn-primary" href="#work">
-                  See selected work
+                  See work experience
                 </a>
                 <a className="btn" href={`mailto:${profile.email}`}>
                   Get in touch
@@ -81,7 +80,7 @@ export default function Home() {
           </dl>
         </Section>
 
-        <Section id="work" index="02" label="Selected work">
+        <Section id="work" index="02" label="Work experience">
           {work.map((company) => (
             <div key={company.company} className="company">
               <h3 className="mono company-head">
@@ -129,26 +128,7 @@ export default function Home() {
           ))}
         </Section>
 
-        <Section id="experience" index="03" label="Experience">
-          <ol className="roles">
-            {experience.map((r) => (
-              <li key={`${r.company}-${r.period}`} className="role">
-                <p className="mono period">{r.period}</p>
-                <div>
-                  <h3>{r.title}</h3>
-                  <p className="company">{r.company}</p>
-                  <ul className="points">
-                    {r.points.map((p) => (
-                      <li key={p}>{p}</li>
-                    ))}
-                  </ul>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Section>
-
-        <Section id="projects" index="04" label="Side projects">
+        <Section id="projects" index="03" label="Side projects">
           <p className="note">Open-source practice projects on GitHub, mostly in Go.</p>
           <ul className="projects">
             {projects.map((p) => (
@@ -175,7 +155,7 @@ export default function Home() {
           </ul>
         </Section>
 
-        <Section id="skills" index="05" label="Skills">
+        <Section id="skills" index="04" label="Skills">
           <dl className="skills">
             {skills.map((s) => (
               <div key={s.group}>
@@ -188,7 +168,7 @@ export default function Home() {
           </dl>
         </Section>
 
-        <Section id="background" index="06" label="Background">
+        <Section id="background" index="05" label="Background">
           <div className="bg-list">
             <div className="role">
               <p className="mono period">{education.period}</p>
@@ -210,7 +190,7 @@ export default function Home() {
           </div>
         </Section>
 
-        <Section id="contact" index="07" label="Contact">
+        <Section id="contact" index="06" label="Contact">
           <p className="contact-lede">Have a project, a role or a question about something I've built? Say hello.</p>
           <a className="contact-mail" href={`mailto:${profile.email}`}>
             {profile.email}
@@ -229,7 +209,7 @@ export default function Home() {
           </ul>
         </Section>
 
-        <Section id="crew" index="08" label="Crew">
+        <Section id="crew" index="07" label="Crew">
           <CrewSection />
         </Section>
       </main>

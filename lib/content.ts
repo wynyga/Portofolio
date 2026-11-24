@@ -47,7 +47,7 @@ export type CompanyWork = {
   cases: CaseStudy[];
 };
 
-// Newest first, matching the Experience section. Cases are numbered per company by the page.
+// Newest first. Each company's role and period head its block; cases are numbered per company by the page.
 export const work: CompanyWork[] = [
   {
     company: "PT Aneka Search Indonesia",
@@ -185,54 +185,6 @@ export const work: CompanyWork[] = [
   },
 ];
 
-export type Role = {
-  period: string;
-  title: string;
-  company: string;
-  points: string[];
-};
-
-export const experience: Role[] = [
-  {
-    period: "Mar 2026 — Present",
-    title: "Full Stack Developer",
-    company: "PT Aneka Search Indonesia",
-    points: [
-      "Build candidate analytics dashboards (Strategic Workforce Planning and Recruitment) for more than 30 client companies, with a Go backend and a React TypeScript frontend.",
-      "Cut the memory used to build a large client's candidate list from 499 MB to 15 MB by streaming rows, and added response caching and gzip to the polling endpoint.",
-      "Implemented cross-application SSO with ES256-signed JWTs, in a service structured in Clean Architecture with architecture tests.",
-      "Develop Laravel microservices covering the Candidate, Content, Tenant, Interview and Organization core services, running in Docker with Redis caching and RabbitMQ events.",
-      "Contribute to the Nucleus Admin API gateway in Go (Gin): JWT authentication, routing to the Laravel services and asynchronous request logs over RabbitMQ.",
-      "Built the assessment support tools, including AI interview generation and an audit log for admin data changes.",
-      "Ported the Exam Monitor metrics module from PHP to Go and verified its output against the PHP version.",
-      "Reworked the client document portal so large files upload through S3 multipart and bulk downloads stream as a ZIP.",
-      "Built an internal dashboard that monitors participant spikes on the online test platform, with Prometheus alerting and real-time checks.",
-    ],
-  },
-  {
-    period: "Jan 2024 — Jan 2026",
-    title: "Full Stack Developer",
-    company: "PT Bumi Asih",
-    points: [
-      "Designed SIMPRO to move business processes from Excel into an integrated system.",
-      "Built the architecture with Laravel on the backend and Next.js on the frontend.",
-      "Developed an automated finance module: warehouse stock monitoring, cash transactions and real-time customer instalment tracking.",
-      "Implemented automated annual reporting to speed up performance evaluation.",
-    ],
-  },
-  {
-    period: "Sep 2024 — Dec 2024",
-    title: "Backend Developer (Intern)",
-    company: "PT Aplikasi Uniq Indonesia",
-    points: [
-      "Built a RESTful CRUD API for a content management system with Node.js.",
-      "Optimised the data model in MongoDB for more efficient access.",
-      "Integrated an interactive chatbot on the FAQ page using a Hugging Face model, improving response time for users.",
-      "Built a phone-verified registration flow with Firebase reCAPTCHA, WhatsApp one-time codes and Firebase custom-token sign-in.",
-    ],
-  },
-];
-
 export type SideProject = {
   name: string;
   summary: string;
@@ -325,8 +277,7 @@ export const organization = {
 
 export const nav = [
   { href: "#about", label: "About" },
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
+  { href: "#work", label: "Experience" },
   { href: "#projects", label: "Projects" },
   { href: "#contact", label: "Contact" },
 ];
