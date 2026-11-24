@@ -7,7 +7,7 @@ export const profile = {
   location: "Jakarta, Indonesia",
   headline: "I build the backend systems and internal tools that teams rely on every day.",
   intro:
-    "Informatics Engineering graduate working across Laravel, Next.js and Go. I design microservices, tune them for latency, and ship internal applications that business teams use directly.",
+    "Informatics Engineering graduate working across Go, Laravel, React and Next.js. I build multi-tenant analytics backends, work on microservices and their gateways, tune them for memory and latency, and ship internal applications that business teams use directly.",
   email: "wayancandrayoga@gmail.com",
   github: "https://github.com/wynyga",
   linkedin: "https://www.linkedin.com/in/wayan-kamandanu-8a925621b/",
@@ -18,14 +18,14 @@ export const profile = {
 
 export const about = [
   "I'm a full stack developer based in Jakarta. I studied Informatics Engineering at Universitas Sam Ratulangi and graduated with a GPA of 3.64.",
-  "Most of my work sits on the backend: distributed Laravel services behind a Go gateway, event-driven processing with RabbitMQ, and Redis caching to keep response times down. I also build the interfaces on top, in Next.js and React, because the best internal tools come from owning the whole path from database to screen.",
+  "Most of my work sits on the backend: Go services in clean architecture, distributed Laravel services behind Go gateways, event-driven processing with RabbitMQ, and Redis caching to keep response times down. I also build the interfaces on top, in Next.js and React, because the best internal tools come from owning the whole path from database to screen.",
   "At university I coordinated the SAR robot team in our robotics unit, designing an autonomous navigation robot for the Indonesian Robot Contest. Today I use personal projects to practise Go, clean architecture and containerised deployments.",
 ];
 
 export const facts = [
   { label: "Currently", value: "Full Stack Developer, PT Aneka Search Indonesia" },
-  { label: "Focus", value: "Distributed backends, internal tools, performance" },
-  { label: "Core stack", value: "Go · Laravel · Next.js · PostgreSQL · Redis" },
+  { label: "Focus", value: "Analytics backends, distributed services, internal tools, performance" },
+  { label: "Core stack", value: "Go · Laravel · React · Next.js · PostgreSQL · Redis" },
 ];
 
 export type CaseStudy = {
@@ -56,18 +56,35 @@ export const work: CompanyWork[] = [
     cases: [
       {
         internal: true,
+        title: "Candidate analytics dashboards",
+        kind: "Backend · Full stack · Data",
+        summary:
+          "Strategic Workforce Planning and Recruitment dashboards that more than 30 client companies use to follow their candidates' assessment results, served by one multi-tenant Go backend.",
+        points: [
+          "Go backend with a React TypeScript front end; each client is onboarded through its own catalog, SQL migrations and seed tooling instead of new code.",
+          "Clean Architecture (domain, use case, adapters, composition root), guarded by architecture tests that fail when a layer imports a package it must not depend on.",
+          "Cut the memory used to build a large client's candidate list from 499 MB to 15 MB by streaming rows, and added response caching and gzip to the polling endpoint.",
+          "Cross-application SSO with ES256-signed JWTs so customers open the dashboards straight from their NUCLEUS client app, with separate writer and reader database connections.",
+          "A versioned dataset cache and PostgreSQL queries tuned with EXPLAIN (ANALYZE, BUFFERS).",
+          "Ported the Exam Monitor metrics module from PHP to Go and verified its output against the PHP version.",
+          "Started as a React rebuild of a static mockup running on in-browser SQLite, then moved onto the Go backend as the client list grew.",
+        ],
+        stack: ["Go", "PostgreSQL", "React", "TypeScript", "JWT (ES256)"],
+      },
+      {
+        internal: true,
         title: "Distributed assessment platform",
         kind: "Backend · Architecture",
         summary:
           "The core services behind an online assessment and recruitment product, split into independently deployable microservices.",
         points: [
           "Laravel microservices for candidate, content, tenant, interview and organisation domains.",
-          "A Go API gateway that routes and manages requests across services.",
+          "Contributed to the Nucleus Admin API gateway in Go (Gin): JWT authentication, routing to the Laravel core services, and request logs published asynchronously to RabbitMQ.",
           "Asynchronous event processing over RabbitMQ so slow work never blocks a request.",
           "Redis as a caching layer to cut response latency on hot reads.",
           "Everything containerised with Docker so development and production behave the same.",
         ],
-        stack: ["Laravel", "Go", "RabbitMQ", "Redis", "Docker"],
+        stack: ["Laravel", "Go", "Gin", "RabbitMQ", "Redis", "Docker"],
       },
       {
         internal: true,
@@ -78,7 +95,7 @@ export const work: CompanyWork[] = [
         points: [
           "Question bank generation and management, built with Next.js on a Laravel API.",
           "An AI interview generation feature, built into the same workflow.",
-          "A centralised audit log that records every data change made through the admin-role tools, so changes are traceable.",
+          "A centralised audit log that records every data change made through the admin-role tools, with a viewer page so the team can trace who changed what.",
         ],
         stack: ["Next.js", "Laravel", "PostgreSQL", "TypeScript"],
       },
@@ -96,16 +113,15 @@ export const work: CompanyWork[] = [
       },
       {
         internal: true,
-        title: "Talent analytics dashboard",
-        kind: "Frontend · Data",
+        title: "Client document portal",
+        kind: "Full stack · Storage",
         summary:
-          "An interactive analytics dashboard for exploring a talent dataset, rebuilt from a static mockup into a working React app.",
+          "A portal where client companies exchange files with the team, reworked so very large uploads and bulk downloads no longer fail.",
         points: [
-          "React front end with Recharts visualisations and TanStack Query for data access.",
-          "Queries run against an in-browser SQLite database (sql.js), so filtering stays instant with no server round-trip.",
-          "Covered by unit tests (Vitest) and end-to-end tests (Playwright).",
+          "Large files upload in chunks straight into S3 multipart uploads instead of passing through the app server in one piece.",
+          "Bulk downloads stream as a ZIP, so the server never holds the whole archive in memory.",
         ],
-        stack: ["React", "TypeScript", "Recharts", "SQLite (sql.js)", "Playwright"],
+        stack: ["Next.js", "Prisma", "AWS S3", "TypeScript"],
       },
     ],
   },
@@ -182,12 +198,14 @@ export const experience: Role[] = [
     title: "Full Stack Developer",
     company: "PT Aneka Search Indonesia",
     points: [
-      "Develop Laravel microservices in a distributed architecture covering the Candidate, Content, Tenant, Interview and Organization core services.",
-      "Use Go as an API gateway to route and manage requests across microservices.",
-      "Implement asynchronous event processing with RabbitMQ as the message broker.",
-      "Optimise service performance with Redis caching to reduce response latency.",
-      "Deploy all services in Docker so development and production stay consistent.",
+      "Build candidate analytics dashboards (Strategic Workforce Planning and Recruitment) for more than 30 client companies, with a Go backend and a React TypeScript frontend.",
+      "Cut the memory used to build a large client's candidate list from 499 MB to 15 MB by streaming rows, and added response caching and gzip to the polling endpoint.",
+      "Implemented cross-application SSO with ES256-signed JWTs, in a service structured in Clean Architecture with architecture tests.",
+      "Develop Laravel microservices covering the Candidate, Content, Tenant, Interview and Organization core services, running in Docker with Redis caching and RabbitMQ events.",
+      "Contribute to the Nucleus Admin API gateway in Go (Gin): JWT authentication, routing to the Laravel services and asynchronous request logs over RabbitMQ.",
       "Built the assessment support tools, including AI interview generation and an audit log for admin data changes.",
+      "Ported the Exam Monitor metrics module from PHP to Go and verified its output against the PHP version.",
+      "Reworked the client document portal so large files upload through S3 multipart and bulk downloads stream as a ZIP.",
       "Built an internal dashboard that monitors participant spikes on the online test platform, with Prometheus alerting and real-time checks.",
     ],
   },
@@ -210,6 +228,7 @@ export const experience: Role[] = [
       "Built a RESTful CRUD API for a content management system with Node.js.",
       "Optimised the data model in MongoDB for more efficient access.",
       "Integrated an interactive chatbot on the FAQ page using a Hugging Face model, improving response time for users.",
+      "Built a phone-verified registration flow with Firebase reCAPTCHA, WhatsApp one-time codes and Firebase custom-token sign-in.",
     ],
   },
 ];
@@ -273,13 +292,13 @@ export const projects: SideProject[] = [
 ];
 
 export const skills = [
-  { group: "Languages", items: ["Go", "PHP", "TypeScript", "JavaScript", "C++", "Python", "C#"] },
-  { group: "Frameworks", items: ["Laravel", "React.js", "Next.js", "Node.js", ".NET"] },
+  { group: "Languages", items: ["Go", "PHP", "TypeScript", "JavaScript", "SQL", "C#"] },
+  { group: "Frameworks", items: ["Laravel", "Gin", "React.js", "Next.js", "Node.js", ".NET"] },
   {
     group: "Backend & data",
-    items: ["RESTful API", "MVC", "Clean Architecture", "MySQL", "PostgreSQL", "MongoDB"],
+    items: ["RESTful API", "Microservices", "Clean Architecture", "PostgreSQL", "MySQL", "MongoDB", "Redis", "RabbitMQ"],
   },
-  { group: "Tools", items: ["Docker", "Git", "Postman", "Jenkins"] },
+  { group: "Tools", items: ["Docker", "Jenkins", "Prometheus", "AWS S3", "Git", "Postman"] },
 ];
 
 export const education = {
