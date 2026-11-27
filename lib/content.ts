@@ -11,9 +11,12 @@ export const profile = {
   email: "wayancandrayoga@gmail.com",
   github: "https://github.com/wynyga",
   linkedin: "https://www.linkedin.com/in/wayan-kamandanu-8a925621b/",
-  // Set to a path under /public (e.g. "/Wayan_Candra_Yoga_Kamandanu_CV.pdf") to show a CV button.
-  // Left empty on purpose: the PDF contains a phone number.
-  cvUrl: "",
+  // CV downloads (files under /public/cv). The general CV, in English and Indonesian.
+  // Regenerate with wayan/cv-source/build.py and copy the *_General.pdf files here. Empty list hides the button.
+  cv: [
+    { lang: "EN", label: "English", href: "/cv/Wayan_Candra_Yoga_Kamandanu_CV_EN.pdf" },
+    { lang: "ID", label: "Bahasa Indonesia", href: "/cv/Wayan_Candra_Yoga_Kamandanu_CV_ID.pdf" },
+  ],
 };
 
 export const about = [

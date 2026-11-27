@@ -1,3 +1,4 @@
+import Link from "next/link";
 import BackToTop from "@/components/BackToTop";
 import CrewSection from "@/components/CrewSection";
 import DescentRail from "@/components/DescentRail";
@@ -49,14 +50,19 @@ export default function Home() {
                 <a className="btn btn-primary" href="#work">
                   See work experience
                 </a>
-                <a className="btn" href={`mailto:${profile.email}`}>
-                  Get in touch
-                </a>
-                {profile.cvUrl && (
-                  <a className="btn" href={profile.cvUrl} download>
-                    Download CV
-                  </a>
+                {profile.cv.length > 0 && (
+                  <span className="btn cv-pick" role="group" aria-label="Download CV">
+                    <span className="cv-pick-label">Download CV</span>
+                    {profile.cv.map((c) => (
+                      <a key={c.lang} href={c.href} download title={`CV in ${c.label} (PDF)`} aria-label={`Download CV in ${c.label}`}>
+                        {c.lang}
+                      </a>
+                    ))}
+                  </span>
                 )}
+                <Link className="btn" href="/moon">
+                  Walk on the moon
+                </Link>
               </div>
             </div>
             <HeroScene />
@@ -217,6 +223,9 @@ export default function Home() {
       <footer className="site-footer">
         <MoonSurface />
         <div className="wrap footer-inner">
+          <p className="mono">
+            <Link href="/moon">Explore this moon in 3D →</Link>
+          </p>
           <p className="mono">© {new Date().getFullYear()} {profile.name}</p>
           <p className="mono">Built with Next.js · Hosted on Vercel</p>
         </div>

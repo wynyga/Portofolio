@@ -342,8 +342,22 @@ a {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.6rem;
   margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+/* a little tighter than other buttons, so the three hero actions share one row on desktop */
+.hero-actions .btn {
+  padding: 0.7rem 1.05rem;
+  white-space: nowrap;
+}
+
+.hero-actions .cv-pick {
+  padding: 0.28rem 0.3rem 0.28rem 1rem;
+}
+
+.hero-actions .cv-pick a {
+  padding: 0.42rem 0.6rem;
 }
 
 .btn {
@@ -1688,4 +1702,367 @@ a {
     transition-duration: 0.01ms !important;
     animation: none !important;
   }
+}
+
+/* ---------- Moonwalk (/moon) ---------- */
+.mw-page {
+  min-height: 100vh;
+}
+
+.mw-root {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  background: #05060f;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.mw-canvas {
+  position: absolute !important;
+  inset: 0;
+}
+
+.mw-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.mw-top {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.mw-chip,
+.mw-prompt,
+.mw-map,
+.mw-card,
+.mw-buttons button {
+  border: 1px solid var(--line);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--fg);
+}
+
+.mw-chip {
+  pointer-events: auto;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.mw-chip:hover,
+.mw-prompt:hover {
+  border-color: var(--accent);
+}
+
+.mw-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.mw-map {
+  position: absolute;
+  top: 62px;
+  right: 16px;
+  width: min(300px, calc(100vw - 32px));
+  padding: 0.9rem;
+  border-radius: 16px;
+}
+
+.mw-map ol {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.mw-map button {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mw-map button:hover,
+.mw-map button:focus-visible {
+  background: var(--chip);
+}
+
+.mw-map button .mono {
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding-top: 0.1rem;
+}
+
+.mw-map b {
+  display: block;
+  font-weight: 600;
+}
+
+.mw-map small {
+  color: var(--muted);
+}
+
+.mw-prompt {
+  position: absolute;
+  left: 50%;
+  bottom: 64px;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 32px);
+  padding: 0.65rem 1.1rem;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  box-shadow: 0 0 24px var(--glow);
+}
+
+.mw-prompt .mono {
+  margin-right: 0.4rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 0.75rem;
+}
+
+.mw-card-wrap {
+  position: absolute;
+  left: 16px;
+  bottom: 56px;
+  width: min(440px, calc(100vw - 32px));
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  border-radius: 18px;
+}
+
+.mw-card {
+  padding: 1.1rem 1.2rem 1.2rem;
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.45);
+}
+
+.mw-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+}
+
+.mw-card h2 {
+  margin: 0.35rem 0 0.15rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.mw-role {
+  margin: 0 0 0.6rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.mw-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.mw-card li + li {
+  margin-top: 0.35rem;
+}
+
+.mw-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.8rem 0 0;
+}
+
+.mw-stack span {
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--chip);
+  font-size: 0.72rem;
+}
+
+.mw-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 0.8rem 0 0;
+  font-size: 0.9rem;
+}
+
+.mw-links a {
+  color: var(--accent);
+}
+
+.mw-close {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mw-close:hover {
+  color: var(--fg);
+}
+
+.mw-help {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  margin: 0;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.mw-joy {
+  position: absolute;
+  left: 24px;
+  bottom: 28px;
+  width: 120px;
+  height: 120px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(16, 20, 48, 0.35);
+  touch-action: none;
+}
+
+.mw-joy span {
+  position: absolute;
+  left: 35px;
+  top: 35px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.mw-buttons {
+  position: absolute;
+  right: 20px;
+  bottom: 32px;
+  display: flex;
+  gap: 12px;
+}
+
+.mw-buttons button {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  font: inherit;
+  font-size: 0.85rem;
+  touch-action: manipulation;
+}
+
+.mw-buttons button.on {
+  border-color: var(--accent);
+  box-shadow: 0 0 18px var(--glow);
+}
+
+/* on touch screens the card sits at the top so the thumbs keep the controls */
+@media (pointer: coarse) {
+  .mw-card-wrap {
+    top: 62px;
+    bottom: auto;
+    max-height: calc(100vh - 220px);
+  }
+
+  .mw-prompt {
+    bottom: 170px;
+  }
+}
+
+.mw-fallback {
+  padding-block: 4rem;
+}
+
+.mw-fallback h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 0.4rem 0;
+}
+
+.mw-fallback-note {
+  color: var(--muted);
+}
+
+.mw-fallback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.2rem 0 2rem;
+}
+
+.mw-fallback-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- CV download with a language choice ---------- */
+.cv-pick {
+  gap: 0.25rem;
+  padding: 0.3rem 0.35rem 0.3rem 1.1rem;
+}
+
+.cv-pick-label {
+  margin-right: 0.35rem;
+}
+
+.cv-pick a {
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: var(--chip);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cv-pick a:hover,
+.cv-pick a:focus-visible {
+  background: var(--accent);
+  color: var(--accent-fg);
 }
